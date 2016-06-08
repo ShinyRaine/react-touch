@@ -1,0 +1,18 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+li{
+  list-style: none;
+}
+body{
+  font: 12px/1 "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+  color: #000;
+  background: #e7e7e7 url(https://land.xiaomi.net/img/micloudv2/sharenewbgs.png) 0 top fixed repeat-x;
+}
+.clearfix:after{
+  content: ".";
+  display:block;
+  clear: both;
+  visibility: hidden;
+}
