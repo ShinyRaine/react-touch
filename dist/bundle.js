@@ -56,7 +56,7 @@
 
 	var _app2 = _interopRequireDefault(_app);
 
-	__webpack_require__(169);
+	__webpack_require__(170);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20376,11 +20376,15 @@
 		value: true
 	});
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	__webpack_require__(169);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20393,20 +20397,70 @@
 	var App = function (_React$Component) {
 		_inherits(App, _React$Component);
 
-		function App() {
+		function App(props) {
 			_classCallCheck(this, App);
 
-			return _possibleConstructorReturn(this, Object.getPrototypeOf(App).apply(this, arguments));
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(App).call(this, props));
+
+			_this.state = {
+				startTime: 0,
+				endTime: 0,
+				startX: 0,
+				startY: 0,
+				endX: 0,
+				endY: 0,
+				move: 0
+			};
+			return _this;
 		}
 
 		_createClass(App, [{
+			key: 'touchStart',
+			value: function touchStart(e) {
+				this.state.startTime = new Date();
+				this.state.startX = e.touches[0].pageX;
+				this.state.startY = e.touches[0].pageY;
+			}
+		}, {
+			key: 'touchMove',
+			value: function touchMove(e) {
+				this.state.startTime = 0;
+			}
+		}, {
+			key: 'touchEnd',
+			value: function touchEnd(e) {
+				console.log(e.changedTouches, e.touches);
+				var endX = e.changedTouches[0].pageX;
+				var endY = e.changedTouches[0].pageY;
+				var endTime = new Date();
+				var moveX = endX - this.state.startX;
+				var moveY = endY - this.state.startY;
+				var time = endTime - this.state.startTime;
+				if (moveX > 50) {
+					console.log('right');
+				} else if (moveX < -50) {
+					console.log('left');
+				}
+
+				if (moveY > 50) {
+					console.log('up');
+				} else if (moveY < -50) {
+					console.log('down');
+				}
+
+				if (time < 300) {
+					console.log('tap');
+				}
+			}
+		}, {
 			key: 'render',
 			value: function render() {
-				return _react2.default.createElement(
-					'div',
-					null,
-					'yoo'
-				);
+				var touch = {
+					onTouchStart: this.touchStart.bind(this),
+					onTouchMove: this.touchMove.bind(this),
+					onTouchEnd: this.touchEnd.bind(this)
+				};
+				return _react2.default.createElement('div', _extends({ className: 'content' }, touch));
 			}
 		}]);
 
@@ -20417,6 +20471,12 @@
 
 /***/ },
 /* 169 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 170 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
