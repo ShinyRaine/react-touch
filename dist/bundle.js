@@ -56,7 +56,7 @@
 
 	var _app2 = _interopRequireDefault(_app);
 
-	__webpack_require__(170);
+	__webpack_require__(171);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -172,6 +172,11 @@
 	// shim for using process in browser
 
 	var process = module.exports = {};
+
+	// cached from whatever global is present so that test runners that stub it don't break things.
+	var cachedSetTimeout = setTimeout;
+	var cachedClearTimeout = clearTimeout;
+
 	var queue = [];
 	var draining = false;
 	var currentQueue;
@@ -196,7 +201,7 @@
 	    if (draining) {
 	        return;
 	    }
-	    var timeout = setTimeout(cleanUpNextTick);
+	    var timeout = cachedSetTimeout(cleanUpNextTick);
 	    draining = true;
 
 	    var len = queue.length;
@@ -213,7 +218,7 @@
 	    }
 	    currentQueue = null;
 	    draining = false;
-	    clearTimeout(timeout);
+	    cachedClearTimeout(timeout);
 	}
 
 	process.nextTick = function (fun) {
@@ -225,7 +230,7 @@
 	    }
 	    queue.push(new Item(fun, args));
 	    if (queue.length === 1 && !draining) {
-	        setTimeout(drainQueue, 0);
+	        cachedSetTimeout(drainQueue, 0);
 	    }
 	};
 
@@ -20376,7 +20381,86 @@
 		value: true
 	});
 
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	__webpack_require__(169);
+
+	var _touch = __webpack_require__(170);
+
+	var _touch2 = _interopRequireDefault(_touch);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var App = function (_React$Component) {
+		_inherits(App, _React$Component);
+
+		function App(props) {
+			_classCallCheck(this, App);
+
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(App).call(this, props));
+		}
+
+		_createClass(App, [{
+			key: 'render',
+			value: function render() {
+				var eventSign = {
+					long: function long() {
+						console.log('long');
+					},
+					right: function right() {
+						console.log('right');
+					},
+					left: function left() {
+						console.log('left');
+					},
+					down: function down() {
+						console.log('down');
+					},
+					up: function up() {
+						console.log('up');
+					},
+					tap: function tap() {
+						console.log('tap');
+					}
+				};
+				return _react2.default.createElement(
+					_touch2.default,
+					eventSign,
+					_react2.default.createElement('div', { style: { height: "400px", background: "rgb(255,243,151)" } })
+				);
+			}
+		}]);
+
+		return App;
+	}(_react2.default.Component);
+
+	exports.default = App;
+
+/***/ },
+/* 169 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 170 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -20394,42 +20478,59 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var App = function (_React$Component) {
-		_inherits(App, _React$Component);
+	var Touch = function (_React$Component) {
+		_inherits(Touch, _React$Component);
 
-		function App(props) {
-			_classCallCheck(this, App);
+		function Touch(props) {
+			_classCallCheck(this, Touch);
 
-			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(App).call(this, props));
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Touch).call(this, props));
 
 			_this.state = {
 				startTime: 0,
-				endTime: 0,
 				startX: 0,
 				startY: 0,
-				endX: 0,
-				endY: 0,
-				move: 0
+				timer: null
 			};
 			return _this;
 		}
 
-		_createClass(App, [{
+		_createClass(Touch, [{
+			key: 'reset',
+			value: function reset() {
+				this.state = {
+					startTime: 0,
+					startX: 0,
+					startY: 0,
+					timer: null
+				};
+			}
+		}, {
+			key: 'eventSign',
+			value: function eventSign(type) {
+				if (typeof this.props[type] == 'function') {
+					this.props[type]();
+				}
+			}
+		}, {
 			key: 'touchStart',
 			value: function touchStart(e) {
 				this.state.startTime = new Date();
 				this.state.startX = e.touches[0].pageX;
 				this.state.startY = e.touches[0].pageY;
+				this.state.timer = setTimeout(function () {
+					this.eventSign('longtap');
+				}, 600);
 			}
 		}, {
 			key: 'touchMove',
 			value: function touchMove(e) {
 				this.state.startTime = 0;
+				clearTimeout(this.state.timer);
 			}
 		}, {
 			key: 'touchEnd',
 			value: function touchEnd(e) {
-				console.log(e.changedTouches, e.touches);
 				var endX = e.changedTouches[0].pageX;
 				var endY = e.changedTouches[0].pageY;
 				var endTime = new Date();
@@ -20437,46 +20538,40 @@
 				var moveY = endY - this.state.startY;
 				var time = endTime - this.state.startTime;
 				if (moveX > 50) {
-					console.log('right');
+					this.eventSign('right');
 				} else if (moveX < -50) {
-					console.log('left');
+					this.eventSign('left');
 				}
-
 				if (moveY > 50) {
-					console.log('up');
+					this.eventSign('down');
 				} else if (moveY < -50) {
-					console.log('down');
+					this.eventSign('up');
 				}
-
 				if (time < 300) {
-					console.log('tap');
+					this.eventSign('tap');
+					clearTimeout(this.state.timer);
 				}
+				this.reset();
 			}
 		}, {
 			key: 'render',
 			value: function render() {
-				var touch = {
+
+				return _react2.default.cloneElement(this.props.children, {
 					onTouchStart: this.touchStart.bind(this),
 					onTouchMove: this.touchMove.bind(this),
 					onTouchEnd: this.touchEnd.bind(this)
-				};
-				return _react2.default.createElement('div', _extends({ className: 'content' }, touch));
+				});
 			}
 		}]);
 
-		return App;
+		return Touch;
 	}(_react2.default.Component);
 
-	exports.default = App;
+	exports.default = Touch;
 
 /***/ },
-/* 169 */
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
-/* 170 */
+/* 171 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
