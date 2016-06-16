@@ -1,6 +1,6 @@
 import React from 'react'
 import './style.css'
-import Touch from './touch'
+import Touch from '../touch'
 class App extends React.Component{
 	constructor(props) {
 		super(props)

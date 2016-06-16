@@ -1,5 +1,4 @@
 import React from 'react'
-import './style.css'
 
 class Touch extends React.Component {
 	constructor(props) {
